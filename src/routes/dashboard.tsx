@@ -42,7 +42,8 @@ const verdictBadge = {
 } as const;
 
 function DashboardPage() {
-  const { scans, stats } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { scans: ScanRow[]; stats: Stats };
+  const { scans, stats } = data;
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "safe" | "suspicious" | "phishing">("all");
 
