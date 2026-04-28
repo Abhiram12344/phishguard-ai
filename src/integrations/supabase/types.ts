@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      scans: {
+        Row: {
+          ai_summary: string | null
+          analysis: Json
+          created_at: string
+          domain: string | null
+          domain_age_days: number | null
+          https: boolean | null
+          id: string
+          ip_resolved: string | null
+          reasons: Json
+          risk_score: number
+          ssl_expires_at: string | null
+          ssl_issuer: string | null
+          ssl_valid: boolean | null
+          url: string
+          verdict: string
+        }
+        Insert: {
+          ai_summary?: string | null
+          analysis?: Json
+          created_at?: string
+          domain?: string | null
+          domain_age_days?: number | null
+          https?: boolean | null
+          id?: string
+          ip_resolved?: string | null
+          reasons?: Json
+          risk_score: number
+          ssl_expires_at?: string | null
+          ssl_issuer?: string | null
+          ssl_valid?: boolean | null
+          url: string
+          verdict: string
+        }
+        Update: {
+          ai_summary?: string | null
+          analysis?: Json
+          created_at?: string
+          domain?: string | null
+          domain_age_days?: number | null
+          https?: boolean | null
+          id?: string
+          ip_resolved?: string | null
+          reasons?: Json
+          risk_score?: number
+          ssl_expires_at?: string | null
+          ssl_issuer?: string | null
+          ssl_valid?: boolean | null
+          url?: string
+          verdict?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
