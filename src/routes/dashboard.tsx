@@ -3,6 +3,24 @@ import { listScans, scanStats } from "@/server/scan.functions";
 import { useState, useMemo } from "react";
 import { ShieldCheck, AlertTriangle, ShieldAlert, Search, ScanSearch } from "lucide-react";
 
+type ScanRow = {
+  id: string;
+  url: string;
+  domain: string | null;
+  verdict: "safe" | "suspicious" | "phishing";
+  risk_score: number;
+  https: boolean | null;
+  domain_age_days: number | null;
+  created_at: string;
+};
+type Stats = {
+  total: number;
+  safe: number;
+  suspicious: number;
+  phishing: number;
+  byDay: { day: string; count: number }[];
+};
+
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
@@ -10,9 +28,9 @@ export const Route = createFileRoute("/dashboard")({
       { name: "description", content: "Recent phishing scans, statistics, and history." },
     ],
   }),
-  loader: async () => {
+  loader: async (): Promise<{ scans: ScanRow[]; stats: Stats }> => {
     const [{ scans }, stats] = await Promise.all([listScans(), scanStats()]);
-    return { scans, stats };
+    return { scans: scans as ScanRow[], stats: stats as Stats };
   },
   component: DashboardPage,
 });
